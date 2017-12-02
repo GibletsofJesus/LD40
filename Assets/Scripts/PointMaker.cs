@@ -5,23 +5,22 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class PointMaker : MonoBehaviour
 {
+    public static PointMaker instance;
     [SerializeField]
     LineRenderer m_lr;
 
     // Use this for initialization
     void Start()
     {
-		
+        instance = this;
     }
 	
     // Update is called once per frame
-
     [ExecuteInEditMode]
     void Update()
     {
         if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.T))
         {
-            Debug.Log("d");
             m_lr.positionCount++;
             m_lr.SetPosition(m_lr.positionCount - 1, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
@@ -35,6 +34,17 @@ public class PointMaker : MonoBehaviour
             curvedPoints = scum.ToArray();
             m_lr.positionCount = curvedPoints.Length;// + 1;
             m_lr.SetPositions(curvedPoints);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            List<Vector3> pts = new List<Vector3>();
+            for (int i = 0; i < m_lr.positionCount; i++)
+            {
+                if (i % 2 == 0)
+                    pts.Add(m_lr.GetPosition(i));
+            }
+            m_lr.positionCount = pts.Count;
+            m_lr.SetPositions(pts.ToArray());
         }
             
     }
@@ -79,20 +89,40 @@ public class PointMaker : MonoBehaviour
         return _index;
     }
 
-    int distanceToNearestPointSquared(Vector3 point, Vector3[] points)
+    int lastPoint;
+
+    public Vector3 WhereGo(Vector3 pos, float offset, bool dog)
     {
-        long nearestDistanceSquared = long.MaxValue;
+        Vector3[] points = new Vector3[m_lr.positionCount];
+        m_lr.GetPositions(points);
 
-        foreach (var p in points)
+        Vector3 goHere = m_lr.GetPosition(GetCorrectedPoint(FindClosestPoint(pos) + (dog ? 3 : 2), points));
+        Vector3 vec = m_lr.GetPosition(GetCorrectedPoint(FindClosestPoint(pos) + (dog ? 4 : 3), points)) - goHere;
+        vec.Normalize();
+        vec = new Vector3(-vec.y, vec.x, 0);
+        vec *= Mathf.Sin(Time.time + offset) / 2;
+        if (dog)
+            goHere += vec;
+        return goHere;
+    }
+
+    int FindClosestPoint(Vector3 point)
+    {
+        float nearest = Mathf.Infinity;
+        int returnMe = 0;
+        for (int i = 0; i < m_lr.positionCount; i++)
         {
-            int dx = p.X - point.X;
-            int dy = p.Y - point.Y;
-
-            long distanceSquared = dx * dx + dy * dy;
-
-            nearestDistanceSquared = Math.Min(nearestDistanceSquared, distanceSquared);
+            if (i - lastPoint < 50)
+            {
+                float d = Vector3.Distance(point, m_lr.GetPosition(i));
+                if (d < nearest)
+                {
+                    returnMe = i;
+                    nearest = d;
+                }
+            }
         }
-
-        return nearestDistanceSquared;
+        lastPoint = returnMe;
+        return returnMe;
     }
 }
