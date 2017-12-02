@@ -17,11 +17,15 @@ public class MainMenuUI : UIFunction
         switch (_index)
         {
             case 2:
+                Debug.Log("q");
                 Application.Quit();
                 break;
-            case 0:
+            case 3:
                 //start game, generate a map
                 SceneManager.LoadScene(1);
+                break;
+            case 0:
+                //options
                 break;  
             case 1:
                 _ref.ToggleTextElements(false);

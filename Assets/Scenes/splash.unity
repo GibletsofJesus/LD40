@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 767294713}
   - component: {fileID: 767294712}
   - component: {fileID: 767294711}
+  - component: {fileID: 767294716}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -284,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a02a2d50f7af34ba1d207448ac0072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AssociatedUiScript: {fileID: 0}
+  AssociatedUiScript: {fileID: 767294716}
   SampleMenuElement: {fileID: 896145564}
   DesiredMenuSize: 6
   options:
@@ -385,8 +386,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 767294710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 327.5, y: 184, z: 0}
-  m_LocalScale: {x: 0.34114584, y: 0.34114584, z: 0.34114584}
+  m_LocalPosition: {x: 496, y: 279, z: 0}
+  m_LocalScale: {x: 0.51666665, y: 0.51666665, z: 0.51666665}
   m_Children:
   - {fileID: 1423513664}
   - {fileID: 896145567}
@@ -399,6 +400,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &767294716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 767294710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746cc5214d3eaa841a615262ca2b8cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_creditTexts:
+  - {fileID: 1785554399}
+  m_creditsBackground: {fileID: 1254584378}
 --- !u!1 &896145564
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1254584377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -521,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -566,7 +581,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1423513663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 539.35876, z: 0}
+  m_LocalPosition: {x: 0, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 767294715}
@@ -657,7 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
