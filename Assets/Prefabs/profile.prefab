@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222966473015927364}
   - component: {fileID: 114050577896242600}
   - component: {fileID: 114655553369619800}
+  - component: {fileID: 114881248333306478}
   - component: {fileID: 114697078828631454}
   - component: {fileID: 114132082964384012}
   m_Layer: 5
@@ -228,6 +229,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114881248333306478}
+        m_MethodName: ToggleContract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -292,6 +304,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114881248333306478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415880404703328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ec8ea4bcc04c24ebbba4b6ee8a293b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  t_name: {fileID: 114323338091366660}
+  t_stats: {fileID: 114745395739228250}
+  i_pic: {fileID: 114750485282099412}
 --- !u!222 &222220851463915154
 CanvasRenderer:
   m_ObjectHideFlags: 1

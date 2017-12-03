@@ -77,6 +77,8 @@ public class Dog : MonoBehaviour
             }
             Movement();
         }
+
+
     }
 
     Vector3 targetPos;

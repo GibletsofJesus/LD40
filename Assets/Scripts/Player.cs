@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         instance = this;
-        targetPos = Camera.main.transform.position;
+        targetPos = transform.position + Vector3.back * 10;
     }
 
     // Update is called once per frame
