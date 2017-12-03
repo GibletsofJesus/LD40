@@ -23,6 +23,16 @@ public class ContractsUI : MonoBehaviour
     public void ToggleDog(int index)
     {
         m_contracts[index].m_walkMe = !m_contracts[index].m_walkMe;
+        walking += m_contracts[index].m_walkMe ? 1 : -1;
+    }
+
+    [SerializeField]
+    UnityEngine.UI.Button button;
+    int walking;
+
+    void Update()
+    {
+        button.interactable = (walking > 0);
     }
 
     void Awake()
@@ -52,9 +62,11 @@ public class ContractsUI : MonoBehaviour
         {
             if (item.m_walkMe)
             {
+                Dog.total++;
                 item.m_dog.gameObject.SetActive(true);
                 item.m_dog.m_owner = Player.instance.gameObject;
-                Instantiate(m_DogHUDPrefab, doghudParent).Init(item.name, item.minDistance);
+                item.m_dog.m_hud = Instantiate(m_DogHUDPrefab, doghudParent);
+                item.m_dog.m_hud.Init(item.name, item.minDistance);
             }
         }
         Destroy(GameObject.Find("music menu"));

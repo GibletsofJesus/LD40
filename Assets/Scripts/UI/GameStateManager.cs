@@ -33,6 +33,10 @@ public class GameStateManager : MonoBehaviour
         {
             ChangeStategames(GameSate.Paused);
         }
+        else if (Input.GetKeyDown(KeyCode.Escape) && m_currentState == GameSate.Paused)
+        {
+            ChangeStategames(GameSate.Gameplay);
+        }
     }
 
     public void ChangeStategames(int _stateIndex)

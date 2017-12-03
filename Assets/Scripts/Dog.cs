@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Dog : MonoBehaviour
 {
+    public static int total;
     [Header("Settings")]
     public bool isActuallyAPerson = true;
     public AudioClip m_barkSound;
@@ -29,7 +30,7 @@ public class Dog : MonoBehaviour
     public DistanceJoint2D m_joint;
     public PointMaker m_route;
     public GameObject m_owner;
-
+    public DogHUD m_hud;
     //airhorns
     [SerializeField]
     Transform targetthing;
@@ -55,6 +56,7 @@ public class Dog : MonoBehaviour
                 offset = Random.value * 6;
             }
         }
+        prevPos = transform.position;
     }
 
     void Update()
@@ -74,13 +76,16 @@ public class Dog : MonoBehaviour
                         m_owner.transform.position
                     };
                 m_lead.SetPositions(newPos);
+                if (m_hud)
+                {
+                    m_hud.UpdateBar(Mathf.Abs((transform.position - prevPos).magnitude));
+                }
             }
             Movement();
         }
-
-
     }
 
+    Vector3 prevPos;
     Vector3 targetPos;
 
     void Movement()
