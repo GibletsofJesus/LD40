@@ -17,9 +17,7 @@ public class GameStateManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    GameObject m_pauseMenu, m_gameplayUI, m_trackMakerUI;
-    [SerializeField]
-    UiScroller PauseUI;
+    GameObject m_pauseMenu, m_gameplayUI;
 
     // Use this for initialization
     void Start()
@@ -51,8 +49,6 @@ public class GameStateManager : MonoBehaviour
                 break;
             case GameSate.Paused:
                 m_pauseMenu.SetActive(false);
-                PauseUI.enabled = false;   
-
                 break;
             case GameSate.Gameplay:
                 break;
@@ -68,7 +64,6 @@ public class GameStateManager : MonoBehaviour
                 break;
             case GameSate.Paused:
                 m_pauseMenu.SetActive(true);
-                PauseUI.enabled = true;   
                 break;
             case GameSate.Gameplay:
                 m_gameplayUI.SetActive(true);

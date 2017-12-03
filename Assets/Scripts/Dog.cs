@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Dog : MonoBehaviour
 {
     [Header("Settings")]
@@ -35,6 +36,7 @@ public class Dog : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         if (m_owner)
         {
             m_joint = m_owner.AddComponent<DistanceJoint2D>();
@@ -57,19 +59,30 @@ public class Dog : MonoBehaviour
 
     void Update()
     {
-        if (!isActuallyAPerson)
+        if (GameStateManager.instance.m_currentState == GameStateManager.GameSate.Gameplay)
         {
-            if (m_owner.tag == "Player")
-                m_joint.distance = Player.m_leadLength;
-            else
-                m_joint.distance = 2.5f;
-            Vector3[] newPos =
-                {
-                    transform.position,
-                    m_owner.transform.position
-                };
-            m_lead.SetPositions(newPos);
+            if (!isActuallyAPerson)
+            {
+                if (m_owner.tag == "Player")
+                    m_joint.distance = Player.m_leadLength;
+                else
+                    m_joint.distance = 2.5f;
+                Vector3[] newPos =
+                    {
+                        transform.position,
+                        (transform.position + m_owner.transform.position) / 2,
+                        m_owner.transform.position
+                    };
+                m_lead.SetPositions(newPos);
+            }
+            Movement();
         }
+    }
+
+    Vector3 targetPos;
+
+    void Movement()
+    {
         Vector3 target = Vector3.zero;
 
         switch (m_state)
@@ -91,38 +104,9 @@ public class Dog : MonoBehaviour
         Vector3 noise = new Vector3(Random.Range(-n, n), Random.Range(-n, n), Random.Range(-n, n));
         m_rigidbody.AddForce((target - transform.position + noise).normalized * m_speed);
 
-        //Vector3 pos = Vector3.Lerp(transform.position, target, Time.deltaTime);
-        //pos.z = 0;
-        //transform.position = pos;
         Vector3 diff = target - transform.position + noise;
         diff.Normalize();
         float z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.LerpUnclamped(transform.rotation, Quaternion.Euler(0, 0, z + 180), Time.deltaTime);
-
-        // MoveCamera();
-    }
-
-    Vector3 targetPos;
-
-    void MoveCamera()
-    {
-        Vector3 p = Camera.main.WorldToViewportPoint(transform.position);
-        if (p.x > 0.6)
-        {
-            targetPos += Vector3.right * Time.deltaTime * 5;
-        }
-        if (p.x < 0.4)
-        {
-            targetPos += Vector3.left * Time.deltaTime * 5;
-        }
-        if (p.y > 0.6)
-        {
-            targetPos += Vector3.up * Time.deltaTime * 5;
-        }
-        if (p.y < 0.4)
-        {
-            targetPos += Vector3.down * Time.deltaTime * 5;
-        }
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPos, Time.deltaTime * 15);
     }
 }

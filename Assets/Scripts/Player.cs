@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         instance = this;
         targetPos = Camera.main.transform.position;
     }
@@ -22,8 +23,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        MoveCamera();
+        if (GameStateManager.instance.m_currentState == GameStateManager.GameSate.Gameplay)
+        {
+            Movement();
+            MoveCamera();
+        }
     }
 
     void Movement()

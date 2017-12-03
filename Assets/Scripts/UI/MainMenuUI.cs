@@ -16,18 +16,14 @@ public class MainMenuUI : UIFunction
     {
         switch (_index)
         {
-            case 2:
-                Debug.Log("q");
+            case 1:
                 Application.Quit();
                 break;
-            case 3:
+            case 0:
                 //start game, generate a map
                 SceneManager.LoadScene(1);
                 break;
-            case 0:
-                //options
-                break;  
-            case 1:
+            case 2:
                 _ref.ToggleTextElements(false);
                 StartCoroutine(FadeCredits(!creditsDisplayed, _ref));
                 break;
